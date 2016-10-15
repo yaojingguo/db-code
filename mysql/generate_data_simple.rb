@@ -4,7 +4,7 @@ require "mysql"
 mode = Hash.new(false)
 ARGV.each { |arg| mode[arg] = true }
 
-m = Mysql.new("127.0.0.1", "root", "", "test", 13000)
+m = Mysql.new("127.0.0.1", "root", "Lin123ux", "test", 13000)
 
 table_name = "t"
 table_name += "_shuffle" if mode["shuffle"]
