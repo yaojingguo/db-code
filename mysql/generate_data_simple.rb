@@ -15,6 +15,7 @@ puts "Creating #{table_name}..."
 
 m.query("DROP TABLE IF EXISTS #{table_name}")
 m.query("CREATE TABLE #{table_name} (i INT UNSIGNED NOT NULL, s CHAR(200) NOT NULL, PRIMARY KEY (i)) ENGINE=InnoDB")
+
 if mode["index_before"]
   m.query("ALTER TABLE #{table_name} ADD INDEX s_before (s)")
 end
