@@ -4,7 +4,7 @@ require "mysql"
 mode = Hash.new(false)
 ARGV.each { |arg| mode[arg] = true }
 
-m = Mysql.new("127.0.0.1", "root", "Lin123ux", "test", 13000)
+m = Mysql.new("127.0.0.1", "root", "Lin123ux", "test")
 
 table_name = "t"
 table_name += "_shuffle" if mode["shuffle"]
@@ -24,6 +24,7 @@ rows = (1..50000).to_a
 
 rows = rows.shuffle if mode["shuffle"]
 
+m.query("set autocommit=0")
 rows.each_with_index do |i, index|
   s = chars.shuffle.join + chars.shuffle.join
   m.query("INSERT INTO #{table_name} (i, s) VALUES (#{i}, REPEAT('#{s}', 20))")
@@ -33,3 +34,4 @@ end
 if mode["index_after"]
   m.query("ALTER TABLE #{table_name} ADD INDEX s_after (s)")
 end
+m.query("commit")
