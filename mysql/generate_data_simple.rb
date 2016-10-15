@@ -35,4 +35,5 @@ end
 if mode["index_after"]
   m.query("ALTER TABLE #{table_name} ADD INDEX s_after (s)")
 end
+
 m.query("commit")
